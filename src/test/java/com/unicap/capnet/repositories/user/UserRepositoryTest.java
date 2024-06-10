@@ -40,6 +40,8 @@ class UserRepositoryTest {
                 Course.CHEMISTRY
         );
 
+        User user = this.createUser(data);
+
         Optional<User> result = Optional.ofNullable(this.userRepository.findByIdAndActiveTrue(1));
 
         assertThat(result.isPresent()).isTrue();

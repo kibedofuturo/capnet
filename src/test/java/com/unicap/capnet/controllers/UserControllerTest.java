@@ -138,11 +138,6 @@ class UserControllerTest {
     }
 
     @Test
-    void update() {
-
-    }
-
-    @Test
     @DisplayName("Deleta usuario por Id e retorna ok")
     void deleteUserCase1() throws Exception {
         long id = 1;
