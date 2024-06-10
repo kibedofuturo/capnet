@@ -42,6 +42,9 @@ public class Alert {
         if (this.description != null) {
             this.description= data.description();
         }
+        if (this.description != null ) {
+            this.date = data.date();
+        }
     }
 
     public void delete() {

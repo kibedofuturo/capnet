@@ -2,10 +2,10 @@ package com.unicap.capnet.domain.user;
 
 import com.unicap.capnet.domain.course.Course;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
+@Builder
 public record UserDTO(
-        @NotNull
-        long id,
         @NotNull
         String name,
         @NotNull

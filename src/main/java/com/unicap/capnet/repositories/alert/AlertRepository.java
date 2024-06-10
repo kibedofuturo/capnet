@@ -6,5 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AlertRepository extends JpaRepository<Alert, Long> {
-    public Page<Alert> findAllByActiveTrue(Pageable pagination);
+    Page<Alert> findAllByActiveTrue(Pageable pagination);
+    Alert findByIdAndActiveTrue(long alertId);
 }

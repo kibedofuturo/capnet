@@ -46,17 +46,10 @@ public class AlertController {
         return ResponseEntity.ok(alertPage);
     }
 
-    @PutMapping("/{alertId}")
+    @PutMapping
     @Transactional
-    public ResponseEntity<String> update(@PathVariable long alertId,@RequestBody @Valid UpdateAlertDTO data) {
-        Alert alert = alertService.findById(alertId);
-
-        if (alert != null) {
-            alertService.updateAlert(data);
-            return ResponseEntity.ok("Alerta atualizado com sucesso!");
-        } else {
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Alerta não encontrado.");
-        }
+    public void update(@RequestBody @Valid UpdateAlertDTO data) {
+        alertService.updateAlert(data);
     }
 
     @DeleteMapping("/{alertId}")

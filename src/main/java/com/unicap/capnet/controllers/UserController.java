@@ -23,8 +23,11 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public void register(@RequestBody @Valid UserDTO data) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<String> register(@RequestBody @Valid UserDTO data) {
         userService.saveUser(data);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Usuário cadastrado com sucesso!");
     }
 
     @GetMapping("/{userId}")

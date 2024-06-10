@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
     Page<Event> findAllByActiveTrue(Pageable pagination);
+    Event findByIdAndActiveTrue(long eventId);
 }

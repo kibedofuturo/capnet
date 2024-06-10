@@ -19,7 +19,7 @@ public class AlertService implements IAlertService {
 
     @Override
     public Alert findById(long alertId) {
-        return alertRepository.getReferenceById(alertId);
+        return alertRepository.findByIdAndActiveTrue(alertId);
     }
 
     @Override

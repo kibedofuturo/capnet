@@ -20,7 +20,7 @@ public class EventService implements IEventService {
 
     @Override
     public Event findById(long eventId) {
-        return eventRepository.findById(eventId).orElse(null);
+        return eventRepository.findByIdAndActiveTrue(eventId);
     }
 
     @Override

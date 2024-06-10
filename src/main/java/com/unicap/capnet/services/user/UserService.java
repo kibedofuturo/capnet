@@ -20,7 +20,7 @@ public class UserService implements IUserService {
 
     @Override
     public User findById(long userId) {
-        return userRepository.findById(userId).orElse(null);
+        return userRepository.findByIdAndActiveTrue(userId);
     }
 
     @Override
