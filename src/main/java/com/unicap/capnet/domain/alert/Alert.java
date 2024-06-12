@@ -1,10 +1,7 @@
 package com.unicap.capnet.domain.alert;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -17,11 +14,15 @@ import java.time.LocalDateTime;
 public class Alert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
+    @Setter
     private String title;
+    @Setter
     private  String description;
+    @Setter
     private  LocalDateTime date;
+
     private LocalDateTime alertDate;
 
     @Column(name = "active", columnDefinition = "boolean USING active:boolean")

@@ -46,10 +46,10 @@ public class EventController {
         return ResponseEntity.ok(eventPage);
     }
 
-    @PutMapping
+    @PutMapping("/{eventId}")
     @Transactional
-    public void update(@RequestBody @Valid UpdateEventDTO data) {
-        eventService.updateEvent(data);
+    public void update(@RequestBody @Valid UpdateEventDTO data, @PathVariable Long eventId) {
+        eventService.updateEvent(data, eventId);
     }
 
     @DeleteMapping("/{eventId}")

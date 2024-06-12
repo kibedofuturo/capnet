@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.unicap.capnet.domain.comment.Comment;
 import com.unicap.capnet.domain.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,7 +20,9 @@ public class Publication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Setter
     private String text;
+
     private LocalDateTime publicationDate;
 
     //@OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)

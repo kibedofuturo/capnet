@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CommentService implements ICommentService {
 
@@ -36,9 +38,12 @@ public class CommentService implements ICommentService {
     }
 
     @Override
-    public void updateComment(UpdateCommentDTO data) {
-        var comment = commentRepository.getReferenceById(data.id());
-        comment.updateInfo(data);
+    public Optional<Comment> updateComment(UpdateCommentDTO data, Long commentId) {
+        return commentRepository.findById(commentId)
+                .map(comment -> {
+                    comment.setText((data.text() == null) ? comment.getText() : data.text());
+                    return commentRepository.save(comment);
+                });
     }
 
     @Override

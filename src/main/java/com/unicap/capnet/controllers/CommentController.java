@@ -30,7 +30,7 @@ public class CommentController {
 
     @PostMapping("/{publicationId}/{userId}")
     @Transactional
-    public void register(@RequestBody @Valid CommentDTO data, @PathVariable long publicationId, @PathVariable long userId) {
+    public void register(@RequestBody @Valid CommentDTO data, @PathVariable Long publicationId, @PathVariable Long userId) {
         var publication = publicationService.findById(publicationId);
         var user = userService.findById(userId);
 
@@ -38,7 +38,7 @@ public class CommentController {
     }
 
     @GetMapping("/{commentId}")
-    public ResponseEntity<ListCommentDTO> getCommentById(@PathVariable long commentId){
+    public ResponseEntity<ListCommentDTO> getCommentById(@PathVariable Long commentId){
         Comment comment = commentService.findById(commentId);
 
         if (comment != null) {
@@ -57,15 +57,15 @@ public class CommentController {
         return ResponseEntity.ok(commentPage);
     }
 
-    @PutMapping
+    @PutMapping("/{commentId}")
     @Transactional
-    public void update(@RequestBody @Valid UpdateCommentDTO data) {
-        commentService.updateComment(data);
+    public void update(@RequestBody @Valid UpdateCommentDTO data, @PathVariable Long commentId) {
+        commentService.updateComment(data, commentId);
     }
 
     @DeleteMapping("/{commentId}")
     @Transactional
-    public ResponseEntity<String> delete(@PathVariable long commentId) {
+    public ResponseEntity<String> delete(@PathVariable Long commentId) {
         Comment comment = commentService.findById(commentId);
 
         if (comment != null) {

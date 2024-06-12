@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AlertService implements IAlertService {
     private final AlertRepository alertRepository;
@@ -33,10 +35,14 @@ public class AlertService implements IAlertService {
     }
 
     @Override
-    public void updateAlert(UpdateAlertDTO data) {
-       var alert = alertRepository.getReferenceById(data.id());
-
-       alert.updateInfo(data);
+    public Optional<Alert> updateAlert(UpdateAlertDTO data, Long alertId) {
+      return alertRepository.findById(alertId)
+              .map(alert -> {
+                  alert.setDate((data.date() == null) ? alert.getDate() : data.date());
+                  alert.setTitle((data.title() == null) ? alert.getTitle() : data.title());
+                  alert.setDescription((data.description() == null) ? alert.getDescription() : data.description());
+                  return alertRepository.save(alert);
+              });
     }
 
     @Override

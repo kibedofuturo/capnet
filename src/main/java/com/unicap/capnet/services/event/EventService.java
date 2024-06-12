@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class EventService implements IEventService {
 
@@ -34,9 +36,13 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public void updateEvent(UpdateEventDTO data) {
-        var event = eventRepository.getReferenceById(data.id());
-        event.updateInfo(data);
+    public Optional<Event> updateEvent(UpdateEventDTO data, Long eventId) {
+        return eventRepository.findById(eventId)
+                .map(event -> {
+                    event.setEventDate((data.eventDate() == null) ? event.getEventDate() : data.eventDate());
+                    event.setDescription((data.description() == null) ? event.getDescription() : data.description());
+                    return  eventRepository.save(event);
+                });
     }
 
     @Override

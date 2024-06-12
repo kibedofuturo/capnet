@@ -46,10 +46,10 @@ public class AlertController {
         return ResponseEntity.ok(alertPage);
     }
 
-    @PutMapping
+    @PutMapping("{alertId}")
     @Transactional
-    public void update(@RequestBody @Valid UpdateAlertDTO data) {
-        alertService.updateAlert(data);
+    public void update(@RequestBody @Valid UpdateAlertDTO data, @PathVariable Long alertId) {
+        alertService.updateAlert(data, alertId);
     }
 
     @DeleteMapping("/{alertId}")

@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PublicationService implements IPublicationService {
 
@@ -35,9 +37,13 @@ public class PublicationService implements IPublicationService {
     }
 
     @Override
-    public void updatePublication(UpdatePublicationDTO data) {
-        var publication = publicationRepository.getReferenceById(data.id());
-        publication.updateInfo(data);
+    public Optional<Publication> updatePublication(UpdatePublicationDTO data, Long userId) {
+
+        return publicationRepository.findById(userId)
+                .map(publication -> {
+                    publication.setText((data.text() == null) ? publication.getText() : data.text());
+                    return publicationRepository.save(publication);
+                });
     }
 
     @Override

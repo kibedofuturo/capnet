@@ -52,10 +52,10 @@ public class PublicationController {
         return ResponseEntity.ok(publicationPage);
     }
 
-    @PutMapping
+    @PutMapping("{userId}")
     @Transactional
-    public void update(@RequestBody @Valid UpdatePublicationDTO data) {
-        publicationService.updatePublication(data);
+    public void update(@RequestBody @Valid UpdatePublicationDTO data, @PathVariable Long userId) {
+        publicationService.updatePublication(data, userId);
     }
 
     @DeleteMapping("{publicationId}")

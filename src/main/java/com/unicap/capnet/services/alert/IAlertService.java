@@ -7,6 +7,8 @@ import com.unicap.capnet.domain.alert.UpdateAlertDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public interface IAlertService {
     Alert findById(long alertId);
 
@@ -14,7 +16,7 @@ public interface IAlertService {
 
     void saveAlert(AlertDTO data);
 
-    void updateAlert(UpdateAlertDTO data);
+    Optional<Alert> updateAlert(UpdateAlertDTO data, Long alertId);
 
     void deleteAlert(long alertId);
 }

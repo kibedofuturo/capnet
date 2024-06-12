@@ -7,6 +7,8 @@ import com.unicap.capnet.domain.event.UpdateEventDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public interface IEventService {
     Event findById(long eventId);
 
@@ -14,7 +16,7 @@ public interface IEventService {
 
     void saveEvent(EventDTO data);
 
-    void updateEvent(UpdateEventDTO data);
+    Optional<Event> updateEvent(UpdateEventDTO data, Long eventId);
 
     void deleteEvent(long eventId);
 }

@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record UpdateAlertDTO(
-        @NotNull
-        long id,
         String title,
         String description,
         LocalDateTime date

@@ -2,10 +2,7 @@ package com.unicap.capnet.domain.event;
 
 import com.unicap.capnet.domain.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -21,7 +18,10 @@ public class Event {
     private long id;
 
     private String title;
+
+    @Setter
     private String description;
+    @Setter
     private LocalDateTime eventDate;
 
     @ManyToOne

@@ -9,6 +9,8 @@ import com.unicap.capnet.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public interface ICommentService {
     Comment findById(long commentId);
 
@@ -16,7 +18,7 @@ public interface ICommentService {
 
     void saveComment(CommentDTO data, Publication publication, User user);
 
-    void updateComment(UpdateCommentDTO data);
+    Optional<Comment> updateComment(UpdateCommentDTO data, Long commentId);
 
     void deleteComment(long commentId);
 }

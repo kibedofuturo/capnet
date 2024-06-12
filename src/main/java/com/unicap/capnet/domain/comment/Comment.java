@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.unicap.capnet.domain.publication.Publication;
 import com.unicap.capnet.domain.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -20,8 +17,9 @@ import java.time.LocalDateTime;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
+    @Setter
     private String text;
     private LocalDateTime commentDate;
 
@@ -39,7 +37,7 @@ public class Comment {
     public Comment(CommentDTO data, Publication publication, User user) {
         active = true;
         text = data.text();
-        commentDate = data.commentDate();
+        commentDate = LocalDateTime.now();
         this.user = user;
         this.publication = publication;
     }

@@ -8,6 +8,8 @@ import com.unicap.capnet.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public interface IPublicationService {
     Publication findById(long publicationId);
 
@@ -15,7 +17,7 @@ public interface IPublicationService {
 
     void savePublication(PublicationDTO data, User user);
 
-    void updatePublication(UpdatePublicationDTO data);
+    Optional<Publication> updatePublication(UpdatePublicationDTO data, Long userId);
 
     void deletePublication(long publicationId);
 }
