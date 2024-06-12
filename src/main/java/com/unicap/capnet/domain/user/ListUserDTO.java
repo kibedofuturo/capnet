@@ -3,7 +3,7 @@ package com.unicap.capnet.domain.user;
 import com.unicap.capnet.domain.course.Course;
 
 public record ListUserDTO(
-        long id,
+        Long id,
         String name,
         String cpf,
         String ra,

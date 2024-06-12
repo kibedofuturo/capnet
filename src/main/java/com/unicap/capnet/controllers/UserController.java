@@ -50,10 +50,10 @@ public class UserController {
         return ResponseEntity.ok(userPage);
     }
 
-    @PutMapping
+    @PutMapping("/{userId}")
     @Transactional
-    public void update(@RequestBody @Valid UpdateUserDTO data) {
-        userService.updateUser(data);
+    public void update(@RequestBody @Valid UpdateUserDTO data, @PathVariable Long userId) {
+        userService.updateUser(data, userId);
     }
 
     @DeleteMapping("{userId}")

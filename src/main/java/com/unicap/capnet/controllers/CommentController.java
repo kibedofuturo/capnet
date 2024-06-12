@@ -5,6 +5,8 @@ import com.unicap.capnet.domain.comment.ListCommentDTO;
 import com.unicap.capnet.domain.comment.Comment;
 import com.unicap.capnet.domain.comment.UpdateCommentDTO;
 import com.unicap.capnet.services.comment.CommentService;
+import com.unicap.capnet.services.publication.PublicationService;
+import com.unicap.capnet.services.user.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +17,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("comments")
+@RequestMapping("/comments")
 public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @PostMapping
+    @Autowired
+    private PublicationService publicationService;
+
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/{publicationId}/{userId}")
     @Transactional
-    public void register(@RequestBody @Valid CommentDTO data) {
-        commentService.saveComment(data);
+    public void register(@RequestBody @Valid CommentDTO data, @PathVariable long publicationId, @PathVariable long userId) {
+        var publication = publicationService.findById(publicationId);
+        var user = userService.findById(userId);
+
+        commentService.saveComment(data, publication, user);
     }
 
     @GetMapping("/{commentId}")

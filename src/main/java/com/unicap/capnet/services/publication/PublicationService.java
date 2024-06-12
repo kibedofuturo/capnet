@@ -4,6 +4,7 @@ import com.unicap.capnet.domain.publication.ListPublicationDTO;
 import com.unicap.capnet.domain.publication.Publication;
 import com.unicap.capnet.domain.publication.PublicationDTO;
 import com.unicap.capnet.domain.publication.UpdatePublicationDTO;
+import com.unicap.capnet.domain.user.User;
 import com.unicap.capnet.repositories.publication.PublicationRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,8 +30,8 @@ public class PublicationService implements IPublicationService {
     }
 
     @Override
-    public void savePublication(PublicationDTO data) {
-        publicationRepository.save(new Publication(data));
+    public void savePublication(PublicationDTO data, User user) {
+        publicationRepository.save(new Publication(data, user));
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.unicap.capnet.domain.comment;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.unicap.capnet.domain.publication.Publication;
+import com.unicap.capnet.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -24,15 +26,22 @@ public class Comment {
     private LocalDateTime commentDate;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
     @JoinColumn(name = "publication_id")
+    @JsonIgnore
     private Publication publication;
 
     private boolean active;
 
-    public Comment(CommentDTO data) {
+    public Comment(CommentDTO data, Publication publication, User user) {
         active = true;
         text = data.text();
         commentDate = data.commentDate();
+        this.user = user;
+        this.publication = publication;
     }
 
     public void updateInfo(UpdateCommentDTO data) {

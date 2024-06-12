@@ -5,6 +5,7 @@ import com.unicap.capnet.domain.publication.Publication;
 import com.unicap.capnet.domain.publication.PublicationDTO;
 import com.unicap.capnet.domain.publication.UpdatePublicationDTO;
 import com.unicap.capnet.services.publication.PublicationService;
+import com.unicap.capnet.services.user.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("publication")
+@RequestMapping("/publications")
 public class PublicationController {
     @Autowired
     private PublicationService publicationService;
 
-    @PostMapping
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/{userId}")
     @Transactional
-    public void register(PublicationDTO data) {
-        publicationService.savePublication(data);
+    public void register(@RequestBody @Valid PublicationDTO data, @PathVariable long userId) {
+        var user = userService.findById(userId);
+
+        publicationService.savePublication(data, user);
     }
 
     @GetMapping("{publicationId}")

@@ -4,6 +4,7 @@ import com.unicap.capnet.domain.publication.ListPublicationDTO;
 import com.unicap.capnet.domain.publication.Publication;
 import com.unicap.capnet.domain.publication.PublicationDTO;
 import com.unicap.capnet.domain.publication.UpdatePublicationDTO;
+import com.unicap.capnet.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -12,7 +13,7 @@ public interface IPublicationService {
 
     Page<ListPublicationDTO> findAllPublications(Pageable pagination);
 
-    void savePublication(PublicationDTO data);
+    void savePublication(PublicationDTO data, User user);
 
     void updatePublication(UpdatePublicationDTO data);
 

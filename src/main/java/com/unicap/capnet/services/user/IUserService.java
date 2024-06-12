@@ -7,6 +7,8 @@ import com.unicap.capnet.domain.user.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public interface IUserService {
     User findById(long userId);
 
@@ -14,8 +16,7 @@ public interface IUserService {
 
     void saveUser(UserDTO data);
 
-    void updateUser(UpdateUserDTO data);
+    Optional<User> updateUser(UpdateUserDTO data, Long userId);
 
     void deleteUser(long userId);
-
 }

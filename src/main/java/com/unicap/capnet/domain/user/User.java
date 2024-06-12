@@ -1,5 +1,7 @@
 package com.unicap.capnet.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.unicap.capnet.domain.comment.Comment;
 import com.unicap.capnet.domain.course.Course;
 import com.unicap.capnet.domain.event.Event;
 import com.unicap.capnet.domain.publication.Publication;
@@ -18,7 +20,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
     private String cpf;
@@ -32,10 +34,16 @@ public class User {
     private Course course;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Publication> publicationList;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Event> eventList;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Comment> commentList;
 
     @Column(name = "active", columnDefinition = "boolean USING active:boolean")
     private boolean active;
@@ -49,6 +57,22 @@ public class User {
         email = data.email();
         password = data.password();
         course = data.course();
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public void setGraduated(boolean graduated) {
+        isGraduated = graduated;
     }
 
     public void updateInfo(UpdateUserDTO data) {

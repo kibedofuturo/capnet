@@ -4,6 +4,8 @@ import com.unicap.capnet.domain.comment.Comment;
 import com.unicap.capnet.domain.comment.CommentDTO;
 import com.unicap.capnet.domain.comment.ListCommentDTO;
 import com.unicap.capnet.domain.comment.UpdateCommentDTO;
+import com.unicap.capnet.domain.publication.Publication;
+import com.unicap.capnet.domain.user.User;
 import com.unicap.capnet.repositories.comment.CommentRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,8 +31,8 @@ public class CommentService implements ICommentService {
     }
 
     @Override
-    public void saveComment(CommentDTO data) {
-        commentRepository.save(new Comment(data));
+    public void saveComment(CommentDTO data, Publication publication, User user) {
+        commentRepository.save(new Comment(data, publication, user));
     }
 
     @Override

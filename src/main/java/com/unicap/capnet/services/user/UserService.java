@@ -7,7 +7,10 @@ import com.unicap.capnet.domain.user.UserDTO;
 import com.unicap.capnet.repositories.user.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService implements IUserService {
@@ -34,9 +37,15 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void updateUser(UpdateUserDTO data) {
-        var user = userRepository.getReferenceById(data.id());
-        user.updateInfo(data);
+    public Optional<User> updateUser(UpdateUserDTO data, Long userId) {
+        return userRepository.findById(userId)
+                .map(user -> {
+                    user.setEmail((data.email() == null) ? user.getEmail() : data.email()) ;
+                    user.setPassword((data.password() == null) ? user.getPassword() : data.password());
+                    user.setGraduated(data.isGraduated());;
+                    user.setCourse((data.course() == null) ? user.getCourse() : data.course());
+                    return userRepository.save(user);
+                });
     }
 
     @Override

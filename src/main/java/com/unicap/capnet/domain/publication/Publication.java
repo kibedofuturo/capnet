@@ -1,5 +1,6 @@
 package com.unicap.capnet.domain.publication;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.unicap.capnet.domain.comment.Comment;
 import com.unicap.capnet.domain.user.User;
 import jakarta.persistence.*;
@@ -32,15 +33,17 @@ public class Publication {
     private List<Comment> commentList;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "active", columnDefinition = "boolean USING active:boolean")
     private boolean active;
 
-    public Publication(PublicationDTO data) {
+    public Publication(PublicationDTO data, User user) {
         active = true;
         text = data.text();
         publicationDate = data.publicationDate();
+        this.user = user;
     }
 
     public void updateInfo(UpdatePublicationDTO data) {
